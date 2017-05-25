@@ -1,0 +1,40 @@
+{
+	"variables": {
+		"hostname": "ubuntu.at.vtt"
+	},
+  "builders": [
+    {
+      "vm_name": "ubuntu", 
+      "accelerator": "kvm",
+      "type": "qemu",
+      "headless": "{{user `headless`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "format": "{{user `disk_format`}}",
+      "output_directory": "{{user `output_directory`}}",
+    
+      "iso_url": "{{user `iso_mirror`}}/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_checksum": "902731a64bf54a057ba266a32de5fbcc4c494fcf",
+      "iso_checksum_type": "sha1",
+	
+      "http_directory": "{{user `http_directory`}}",
+      "http_port_min": 10082,
+      "http_port_max": 10089,  
+      
+      "boot_command": [
+				"<tab><wait>",
+				" auto=true noapic=true fb=false",
+                " locale=en_US keyboard-configuration/modelcode=SKIP",
+                " hostname={{user `hostname`}}",
+				" preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu16LTS-preseed.cfg",
+                "<enter>"
+			],
+
+      "boot_wait": "{{user `boot_wait_time`}}",
+      "shutdown_command": "{{user `shutdown_command`}}",
+
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}"      
+    }
+  ]
+}

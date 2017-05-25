@@ -1,0 +1,41 @@
+{
+  "builders":  [
+    {
+      "accelerator": "kvm",
+      "type": "qemu",
+      "qemuargs": [
+				[ "-netdev", "user,hostfwd=tcp::{{ .SSHHostPort }}-:22,id=forward"],
+				[ "-device", "e1000,netdev=forward,id=net0"]
+			],
+
+      "iso_url": "http://mirrors.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-NetInstall-1611.iso",
+      "iso_checksum_type": "sha1",
+      "iso_checksum": "156f4cb711fdbd668943711f853fb6da89581aad",
+
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,      
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos7-ks.cfg<enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "shutdown_command": "shutdown -P now",
+
+      "headless": false,
+      "disk_size": 5000,
+      "format": "qcow2",
+      "vm_name": "centos7", 
+      "output_directory": "out-centos7",
+      
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "root",
+      "ssh_password": "sangfor",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10m",
+
+      "net_device": "e1000",
+      "disk_interface": "virtio"
+    }
+  ]
+}

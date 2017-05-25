@@ -1,0 +1,17 @@
+{
+	"headless": "false",
+	"boot_wait_time": "2s",
+	"shutdown_command": "shutdown -P now",
+
+	"disk_size": "10000",
+	"disk_format": "qcow2",
+	"output_directory": "out",
+
+	"http_directory": "httpdir",
+
+	"ssh_username": "root",
+	"ssh_password": "sangfor",
+	"ssh_wait_timeout": "1800s",
+
+	"iso_mirror": "http://mirrors.ustc.edu.cn"
+}
